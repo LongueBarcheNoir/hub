@@ -49,7 +49,7 @@ def main():
     # Set up argument parsing
     parser = argparse.ArgumentParser(description="Execute keyboard automation commands.")
     parser.add_argument('trig', type=str, help='The trigger key to simulate.')
-    parser.add_argument('input', type=str, help='The input commands to execute.')
+    parser.add_argument('--trig', type=str, help='The trigger key to simulate.', required=False, default='')
     args = parser.parse_args()
 
     # Press backspace key as many times as the length of the trigger
