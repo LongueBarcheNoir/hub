@@ -36,6 +36,38 @@ matches:
         params:
           args:
             - python3
-            - '%CONFIG%/match/packages/delays-characters/parse_pynput.py' 
+            - '%CONFIG%/match/packages/delays-characters/parse_pynput.py'
+            - '--trig'
             - '{{Trig}}'
+            - '{{Input}}'
+
+  # Trigger to be called through the search bar only - no trigger replacement
+  - trigger: "!send-keystrokes!"
+    label: "Type random text, send CTRL+SHIFT+X to window then type text again."
+    replace: "{{Output}}"
+    vars:
+      - name: Input
+        type: echo
+        params:
+          echo: |      # Amend the contents below to suit, adding variables etc.
+            type Typing stuff
+            tap enter
+            type Pausing for one second
+            tap enter
+            sleep 1
+            type Sending 'Ctrl+Shift+X' to enable formatting options in Teams
+            press ctrl
+            press shift
+            press x
+            release x
+            release shift
+            release ctrl
+            type _formatting text using MD syntax_
+            tap enter
+      - name: Output
+        type: script
+        params:
+          args:
+            - python3
+            - '%CONFIG%/match/packages/delays-characters/parse_pynput.py' 
             - '{{Input}}'
